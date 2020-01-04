@@ -1,0 +1,36 @@
+{
+  "name": "marchmadness-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev --no-notify --respawn --transpileOnly ./src",
+    "start": "npx ts-node --transpile-only ./src",
+    "heroku-deploy": "npx prisma deploy -e .env.prod",
+    "heroku-seed": "npx prisma seed -e .env.prod",
+    "heroku-init": "npx heroku create",
+    "heroku-config": "npx heroku config:set $(cat .env.prod | sed '/^$/d; /#[[:print:]]*$/d')",
+    "heroku-push": "git push heroku master",
+    "heroku-postbuild": "npx prisma generate && npx nexus-prisma-generate --client ./generated/prisma-client --output ./generated/nexus-prisma",
+    "login": "npx prisma login",
+    "deploy": "npx prisma deploy",
+    "reset": "npx prisma reset",
+    "seed": "npx prisma seed",
+    "seed:watch": "npx ts-node-dev --respawn --no-notify --transpileOnly ./seed/index"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/faker": "^4.1.8",
+    "faker": "^4.1.0",
+    "ts-node-dev": "^1.0.0-pre.44"
+  },
+  "dependencies": {
+    "apollo-server": "^2.9.15",
+    "graphql": "^14.5.8",
+    "nexus": "^0.11.7",
+    "nexus-prisma": "^0.3.8",
+    "prisma-client-lib": "^1.34.10",
+    "typescript": "^3.7.4"
+  }
+}

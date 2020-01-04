@@ -1,0 +1,21 @@
+type Team {
+  id: ID! @id
+  region: String!
+  abbrev: String!
+  name: String!
+  city: String!
+  state: String!
+  players: [Player!]! @relation(name: "PlayerToTeams", onDelete: CASCADE)
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Player {
+  id: ID! @id
+  name: String!
+  number: Int!
+  team: Team! @relation(name: "PlayerToTeams")
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
